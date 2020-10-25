@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Table } from '../components/Table';
 import {
     Button,
+    CircularProgress,
     Dialog,
     DialogActions,
     DialogContent,
@@ -33,6 +34,7 @@ export default function Home() {
     const [value, set_value] = useState<ResData | null>(null);
     const [open, set_open] = useState(false);
     const [loading, set_loading] = useState(false);
+    const [error, set_error] = useState('');
     const { control, reset, handleSubmit, errors } = useForm<FormData>();
 
     const handle_open = () => {
@@ -48,18 +50,22 @@ export default function Home() {
     };
 
     const handle_submit = async (data: FormData) => {
-        console.log(data);
+        set_error(false);
         set_loading(true);
         try {
-            const res = await axios.post('https://nutrient-diagnosis-app-server.herokuapp.com/macdonalds', {
-                post_text: data,
-            });
+            const res = await axios.post(
+                'https://nutrient-diagnosis-app-server.herokuapp.com/macdonalds',
+                {
+                    post_text: data,
+                }
+            );
             console.log(res);
             set_value(res);
             handle_close();
             reset();
         } catch (res) {
             console.log(res);
+            set_error('接続に失敗しました');
         } finally {
             set_loading(false);
         }
@@ -83,91 +89,126 @@ export default function Home() {
         </Container>
     ) : (
         <Center>
-            <h3>マックで1日に必要な栄養を取るためのメニューを診断！</h3>
-            <Button onClick={handle_open} variant="contained" color="primary">
-                早速診断する！
-            </Button>
-            <Dialog open={open} onClose={handle_close}>
-                <DialogTitle>性別と年齢を選択してください</DialogTitle>
-                <form onSubmit={handleSubmit(handle_submit)}>
-                    <DialogContent>
-                        <Column>
-                            <FormLabel component="legend">性別</FormLabel>
-                            <Controller
-                                name="gender"
-                                control={control}
-                                defaultValue=""
-                                rules={{ required: '性別を選択してください' }}
-                                as={
-                                    <RadioGroup name="gender1">
-                                        <Row>
-                                            <FormControlLabel
-                                                value="male"
-                                                control={
-                                                    <Radio color="primary" />
-                                                }
-                                                label="男性"
-                                            />
-                                            <FormControlLabel
-                                                value="female"
-                                                control={<Radio />}
-                                                label="女性"
-                                            />
-                                        </Row>
-                                    </RadioGroup>
-                                }
-                            />
-                            {errors.gender && (
-                                <StyledAlert
-                                    variant="outlined"
-                                    severity="error"
-                                >
-                                    {errors.gender.message}
-                                </StyledAlert>
-                            )}
-                            <InputLabel id="demo-dialog-select-label">
-                                年齢
-                            </InputLabel>
-                            <Controller
-                                name="age"
-                                control={control}
-                                defaultValue=""
-                                rules={{ required: '年齢を選択してください' }}
-                                as={
-                                    <StyledSelect
-                                        labelId="demo-dialog-select-label"
-                                        id="demo-dialog-select"
+            {loading ? (
+                <CircularProgress />
+            ) : (
+                <>
+                    <h3>マックで1日に必要な栄養を取るためのメニューを診断！</h3>
+                    <Button
+                        onClick={handle_open}
+                        variant="contained"
+                        color="primary"
+                    >
+                        早速診断する！
+                    </Button>
+                    {error ? (
+                        <StyledAlert variant="outlined" severity="error">
+                            {error}
+                        </StyledAlert>
+                    ) : (
+                        <Dialog open={open} onClose={handle_close}>
+                            <DialogTitle>
+                                性別と年齢を選択してください
+                            </DialogTitle>
+                            <form onSubmit={handleSubmit(handle_submit)}>
+                                <DialogContent>
+                                    <Column>
+                                        <FormLabel component="legend">
+                                            性別
+                                        </FormLabel>
+                                        <Controller
+                                            name="gender"
+                                            control={control}
+                                            defaultValue=""
+                                            rules={{
+                                                required:
+                                                    '性別を選択してください',
+                                            }}
+                                            as={
+                                                <RadioGroup name="gender1">
+                                                    <Row>
+                                                        <FormControlLabel
+                                                            value="male"
+                                                            control={
+                                                                <Radio color="primary" />
+                                                            }
+                                                            label="男性"
+                                                        />
+                                                        <FormControlLabel
+                                                            value="female"
+                                                            control={<Radio />}
+                                                            label="女性"
+                                                        />
+                                                    </Row>
+                                                </RadioGroup>
+                                            }
+                                        />
+                                        {errors.gender && (
+                                            <StyledAlert
+                                                variant="outlined"
+                                                severity="error"
+                                            >
+                                                {errors.gender.message}
+                                            </StyledAlert>
+                                        )}
+                                        <InputLabel id="demo-dialog-select-label">
+                                            年齢
+                                        </InputLabel>
+                                        <Controller
+                                            name="age"
+                                            control={control}
+                                            defaultValue=""
+                                            rules={{
+                                                required:
+                                                    '年齢を選択してください',
+                                            }}
+                                            as={
+                                                <StyledSelect
+                                                    labelId="demo-dialog-select-label"
+                                                    id="demo-dialog-select"
+                                                >
+                                                    <MenuItem value={10}>
+                                                        10代
+                                                    </MenuItem>
+                                                    <MenuItem value={20}>
+                                                        20代
+                                                    </MenuItem>
+                                                    <MenuItem value={30}>
+                                                        30代
+                                                    </MenuItem>
+                                                </StyledSelect>
+                                            }
+                                        />
+                                        {errors.age && (
+                                            <StyledAlert
+                                                variant="outlined"
+                                                severity="error"
+                                            >
+                                                {errors.age.message}
+                                            </StyledAlert>
+                                        )}
+                                    </Column>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button
+                                        onClick={handle_close}
+                                        color="secondary"
                                     >
-                                        <MenuItem value={10}>10代</MenuItem>
-                                        <MenuItem value={20}>20代</MenuItem>
-                                        <MenuItem value={30}>30代</MenuItem>
-                                    </StyledSelect>
-                                }
-                            />
-                            {errors.age && (
-                                <StyledAlert
-                                    variant="outlined"
-                                    severity="error"
-                                >
-                                    {errors.age.message}
-                                </StyledAlert>
-                            )}
-                        </Column>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handle_close} color="secondary">
-                            キャンセル
-                        </Button>
-                        <Button
-                            type="submit"
-                            color="primary"
-                            disabled={loading}
-                        >
-                            OK
-                        </Button>
-                    </DialogActions>
-                </form>
-            </Dialog>
+                                        キャンセル
+                                    </Button>
+                                    <Button
+                                        type="submit"
+                                        color="primary"
+                                        disabled={loading}
+                                    >
+                                        OK
+                                    </Button>
+                                </DialogActions>
+                            </form>
+                        </Dialog>
+                    )}
+                </>
+            )}
         </Center>
     );
 }

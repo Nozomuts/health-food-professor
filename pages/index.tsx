@@ -50,7 +50,7 @@ export default function Home() {
     };
 
     const handle_submit = async (data: FormData) => {
-        set_error(false);
+        set_error('');
         set_loading(true);
         try {
             const res = await axios.post(

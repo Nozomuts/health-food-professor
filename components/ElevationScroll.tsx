@@ -6,6 +6,9 @@ type Props = {
     children: React.ReactElement;
 };
 
+/**
+ * スクロール時にヘッダーを固定
+ */
 export const ElevationScroll = ({ children, window }: Props) => {
     const trigger = useScrollTrigger({
         disableHysteresis: true,

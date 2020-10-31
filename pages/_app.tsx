@@ -9,6 +9,10 @@ import '../styles/global.scss';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { ElevationScroll } from '../components/ElevationScroll';
 
+/**
+ * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
+ * 全体のラップ
+ */
 export default function App({ Component, pageProps }: AppProps) {
     // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
     useEffect(() => {
@@ -27,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         <AppBar>
                             <Toolbar>
                                 <Typography variant="h6">
-                                    栄養診断App v0.1.0
+                                    栄養診断App v1.2.0
                                 </Typography>
                             </Toolbar>
                         </AppBar>

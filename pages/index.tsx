@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { FormDialog } from '../components/FormDialog';
 import { StartForm } from '../components/StartForm';
@@ -68,35 +68,45 @@ export default function Home() {
         <Result value={value} on_click={on_click_return} />
     ) : (
         <Center>
-            <h3>マックで1日に必要な栄養を取るためのメニューを診断！</h3>
-            <Button onClick={on_click_open} variant="contained" color="primary">
-                早速診断する！
-            </Button>
-            <FormDialog
-                open={open}
-                on_close={on_close}
-                on_submit={handleSubmit(on_submit)}
-                actions={
-                    <>
-                        <Button onClick={on_close} color="secondary">
-                            キャンセル
-                        </Button>
-                        <Button
-                            type="submit"
-                            color="primary"
-                            disabled={loading}
-                        >
-                            OK
-                        </Button>
-                    </>
-                }
-            >
-                <StartForm
-                    control={control}
-                    register={register}
-                    errors={errors}
-                />
-            </FormDialog>
+            {loading ? (
+                <CircularProgress />
+            ) : (
+                <>
+                    <h3>マックで1日に必要な栄養を取るためのメニューを診断！</h3>
+                    <Button
+                        onClick={on_click_open}
+                        variant="contained"
+                        color="primary"
+                    >
+                        早速診断する！
+                    </Button>
+                    <FormDialog
+                        open={open}
+                        on_close={on_close}
+                        on_submit={handleSubmit(on_submit)}
+                        actions={
+                            <>
+                                <Button onClick={on_close} color="secondary">
+                                    キャンセル
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    color="primary"
+                                    disabled={loading}
+                                >
+                                    OK
+                                </Button>
+                            </>
+                        }
+                    >
+                        <StartForm
+                            control={control}
+                            register={register}
+                            errors={errors}
+                        />
+                    </FormDialog>
+                </>
+            )}
         </Center>
     );
 }

@@ -54,8 +54,8 @@ export default function Home() {
             );
             console.log(res);
             set_value(res);
-            on_close();
             reset();
+            on_close();
         } catch (res) {
             console.log(res);
         } finally {

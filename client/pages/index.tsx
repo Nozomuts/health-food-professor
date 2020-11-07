@@ -47,7 +47,7 @@ export default function Home() {
         set_loading(true);
         try {
             const res = await axios.post(
-                'https://nutrient-diagnosis-app-server.herokuapp.com/macdonalds',
+                'https://nutrient-app-server.herokuapp.com//macdonalds',
                 {
                     data,
                 }

@@ -19,7 +19,7 @@ export const Button: FC<Props> = ({ children, type, handle_click }) => {
 const StyledButton = styled.button`
   text-decoration: none;
   overflow: hidden;
-  padding: 1.5rem 6rem;
+  padding: 1.5rem 5rem;
   background: #fff;
   font-size: 1.6rem;
   font-weight: 700;

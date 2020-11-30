@@ -5,18 +5,25 @@ import styled from "styled-components";
 import { Button } from "../components/Button";
 import { Chart } from "../components/Chart";
 import { Table } from "../components/Table";
-import { result_value } from "../recoil";
+import { menu_value, result_value, shop_state } from "../recoil";
 import { Text } from "../styles/common";
 import { sp } from "../styles/media";
 
 export default function Result() {
   const result = useRecoilValue(result_value);
+  const reset_shop = useResetRecoilState(shop_state);
+  const reset_menu = useResetRecoilState(menu_value);
   const router = useRouter();
 
   useEffect(() => {
     if (result.length === 0) {
       router.push("/");
     }
+    window.scroll(0, 0);
+    return () => {
+      reset_shop();
+      reset_menu();
+    };
   }, []);
 
   return (
@@ -24,6 +31,7 @@ export default function Result() {
       <Text
         css={`
           text-align: center;
+          margin-bottom: 50px;
         `}>
         診断結果
       </Text>
@@ -33,10 +41,10 @@ export default function Result() {
           <Table result={result[0] as { [name: string]: string }} />
         </Container>
       ) : (
-        <h1>そんな都合のいいメニューはありません！</h1>
+        <H1>そんな都合のいいメニューはありません！</H1>
       )}
       <ButtonContainer>
-        <Button handle_click={() => location.replace("/")}>TOPへ戻る</Button>
+        <Button handle_click={() => router.push("/")}>TOPへ戻る</Button>
       </ButtonContainer>
     </>
   );
@@ -49,6 +57,13 @@ const Container = styled.div`
   ${sp`
     flex-direction: column;
   `}
+`;
+
+const H1 = styled.h1`
+  text-align: center;
+  margin: 100px auto;
+  font-size: 30px;
+  font-weight: bold;
 `;
 
 const ButtonContainer = styled.div`

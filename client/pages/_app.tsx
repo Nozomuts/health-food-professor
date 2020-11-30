@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { AppProps } from "next/app";
 import "../styles/global.scss";
 import { RecoilRoot } from "recoil";
@@ -16,14 +16,6 @@ config.autoAddCss = false;
  * 全体のラップ
  */
 export default function App({ Component, pageProps }: AppProps) {
-  // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
-  useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }, []);
-
   return (
     <RecoilRoot>
       <Reset />

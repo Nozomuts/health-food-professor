@@ -7,9 +7,14 @@ import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Desc, Text } from "../styles/common";
 import { Shop } from "../components/Shop";
+import { useEffect } from "react";
 
 export default function Home() {
   const [method, set_method] = useState<"menu" | "shop">("menu");
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <Container>

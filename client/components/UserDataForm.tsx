@@ -45,7 +45,7 @@ export const UserDataForm: FC<Props> = ({ method }) => {
           : menu.length > 0
           ? ["macdonalds", "dennys"]
           : [];
-      const res = await Axios.post("http://localhost:5000/api/check", {
+      const res = await Axios.post("https://nutrient-app-server.herokuapp.com/api/check", {
         data,
       });
       console.log(res);

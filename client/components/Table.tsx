@@ -1,62 +1,57 @@
-import React from 'react';
-import {
-    Paper,
-    Table as MaterialTable,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from '@material-ui/core';
-import { FC } from 'react';
-import styled from 'styled-components';
-import { COLOR } from '../styles/colors';
+import React, { FC } from "react";
+import styled from "styled-components";
+import { sp } from "../styles/media";
 
 type Props = {
-    value?: string[][];
-    headers: string[];
+  result: { [name: string]: string };
 };
 
-/**
- * 受け取ったvalueを基にテーブルで表示
- */
-export const Table: FC<Props> = ({ value, headers }) => {
-    return (
-        <StyledTableContainer component={Paper}>
-            <MaterialTable>
-                <StyledTableHead>
-                    <TableRow>
-                        {headers.map((header) => (
-                            <TableCell align="center" key={String(header)}>
-                                {header}
-                            </TableCell>
-                        ))}
-                    </TableRow>
-                </StyledTableHead>
-                <TableBody>
-                    {value &&
-                        value
-                            .filter((el) => el[1] !== '0個')
-                            .map((el) => (
-                                <TableRow key={String(el)}>
-                                    <TableCell align="center">
-                                        {el[0]}
-                                    </TableCell>
-                                    <TableCell align="center">
-                                        {el[1]}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                </TableBody>
-            </MaterialTable>
-        </StyledTableContainer>
-    );
+export const Table: FC<Props> = ({ result }) => {
+  return (
+    <TableContainer>
+      <table>
+        <tr>
+          <th>メニュー名</th>
+          <th>個数</th>
+        </tr>
+        {result &&
+          Object.entries(result)
+            .filter((el) => el[1] !== "0個")
+            .map((el) => (
+              <tr>
+                <td>{el[0]}</td>
+                <td>{el[1].replace("個", "")}</td>
+              </tr>
+            ))}
+      </table>
+    </TableContainer>
+  );
 };
 
-const StyledTableContainer = styled(TableContainer)<any>`
-    margin-bottom: 30px;
-`;
-
-const StyledTableHead = styled(TableHead)`
-    background-color: ${COLOR.SMOKE};
+const TableContainer = styled.div`
+  width: 430px;
+  height: 300px;
+  margin-left: 100px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  table {
+      width:100%;
+    th,
+    td {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 0.6em;
+      text-align: center;
+    }
+    th {
+      background: #000;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+  ${sp`
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+    margin: 50px 0 0 0;
+  `}
 `;

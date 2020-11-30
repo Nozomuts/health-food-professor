@@ -1,120 +1,56 @@
-import axios from 'axios';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { Button, CircularProgress } from '@material-ui/core';
-import { useForm } from 'react-hook-form';
-import { FormDialog } from '../components/FormDialog';
-import { StartForm } from '../components/StartForm';
-import { Result } from '../components/Result';
-
-type FormData = {
-    gender: string;
-    old: string;
-    up_value: string;
-};
-
-export type ResData = {
-    data: { [name: string]: string[] };
-};
+import styled from "styled-components";
+import { UserDataForm } from "../components/UserDataForm";
+import { Menu } from "../components/Menu";
+import { SelectedMenu } from "../components/SelectedMenu";
+import { MethodRadio } from "../components/MethodRadio";
+import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Desc, Text } from "../styles/common";
+import { Shop } from "../components/Shop";
 
 export default function Home() {
-    const [value, set_value] = useState<ResData | null>(null);
-    const [open, set_open] = useState(false);
-    const [loading, set_loading] = useState(false);
-    const { control, reset, handleSubmit, errors, register } = useForm<
-        FormData
-    >();
+  const [method, set_method] = useState<"menu" | "shop">("menu");
 
-    // reduxに置き換える
-    const on_click_open = () => {
-        set_open(true);
-    };
-
-    const on_click_return = () => {
-        set_value(null);
-    };
-
-    // reduxに置き換える
-    const on_close = () => {
-        set_open(false);
-    };
-
-    /**
-     * 性別、年齢、上限のデータを渡す
-     * index.pyのindexが実行される
-     */
-    const on_submit = async (data: FormData) => {
-        set_loading(true);
-        try {
-            const res = await axios.post(
-                'https://nutrient-app-server.herokuapp.com/macdonalds',
-                {
-                    data,
-                }
-            );
-            console.log(res);
-            set_value(res);
-            reset();
-            on_close();
-        } catch (res) {
-            console.log(res);
-        } finally {
-            set_loading(false);
-        }
-    };
-
-    // valueがない時はTOPページ、ある時は診断結果を表示
-    return value ? (
-        <Result value={value} on_click={on_click_return} />
-    ) : (
-        <Center>
-            {loading ? (
-                <CircularProgress />
-            ) : (
-                <>
-                    <h3>マックで1日に必要な栄養を取るためのメニューを診断！</h3>
-                    <Button
-                        onClick={on_click_open}
-                        variant="contained"
-                        color="primary"
-                    >
-                        早速診断する！
-                    </Button>
-                    <FormDialog
-                        open={open}
-                        on_close={on_close}
-                        on_submit={handleSubmit(on_submit)}
-                        actions={
-                            <>
-                                <Button onClick={on_close} color="secondary">
-                                    キャンセル
-                                </Button>
-                                <Button
-                                    type="submit"
-                                    color="primary"
-                                    disabled={loading}
-                                >
-                                    OK
-                                </Button>
-                            </>
-                        }
-                    >
-                        <StartForm
-                            control={control}
-                            register={register}
-                            errors={errors}
-                        />
-                    </FormDialog>
-                </>
-            )}
-        </Center>
-    );
+  return (
+    <Container>
+      <Text>1日に必要な栄養を取るためのメニューを診断！</Text>
+      <Text>
+        あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
+      </Text>
+      <br />
+      <Text>1.メニューまたは店の種類を選択してください。</Text>
+      <Desc>※ 店を選択した場合は店の全メニューから計算されます。</Desc>
+      <RadioGroup>
+        <MethodRadio
+          icon={faBookOpen}
+          label="メニューから選択"
+          checked={method === "menu"}
+          handle_click={() => set_method("menu")}
+        />
+        <MethodRadio
+          icon={faStore}
+          label="店から選択"
+          checked={method === "shop"}
+          handle_click={() => set_method("shop")}
+        />
+      </RadioGroup>
+      {method === "menu" ? <Menu /> : <Shop />}
+      {method === "menu" && <SelectedMenu />}
+      <Text>2.基本情報を入力</Text>
+      <UserDataForm method={method} />
+    </Container>
+  );
 }
 
-export const Center = styled.div`
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    text-align: center;
+const Container = styled.div`
+  text-align: center;
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+`;
+
+const RadioGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
 `;

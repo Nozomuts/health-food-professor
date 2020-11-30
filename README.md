@@ -3,3 +3,6 @@
 現在はマクドナルドのメニューのみですが、今後のアップデートでメニューや機能を増やしていくつもりです。
 
 [nutrient-app-lyart.vercel.app](nutrient-app-lyart.vercel.app)
+
+開発用のリポジトリ
+[https://github.com/kthr3e/develop_app](https://github.com/kthr3e/develop_app)

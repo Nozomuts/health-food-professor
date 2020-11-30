@@ -36,7 +36,6 @@ export const UserDataForm: FC<Props> = ({ method }) => {
   const router = useRouter();
 
   const on_submit = async (data: FormData) => {
-    console.log(data);
     try {
       data["menu"] = menu;
       data["shop"] =
@@ -48,7 +47,6 @@ export const UserDataForm: FC<Props> = ({ method }) => {
       const res = await Axios.post("https://nutrient-app-server.herokuapp.com/api/check", {
         data,
       });
-      console.log(res);
       set_result_value(res.data);
       reset();
       router.push("/result");

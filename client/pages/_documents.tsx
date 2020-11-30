@@ -6,14 +6,14 @@ import { ServerStyleSheet } from "styled-components";
  */
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const styledComponentSheets = new ServerStyleSheet();
+    const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            styledComponentSheets.collectStyles(<App {...props} />),
+            sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -22,12 +22,12 @@ export default class MyDocument extends Document {
         styles: (
           <>
             {initialProps.styles}
-            {styledComponentSheets.getStyleElement()}
+            {sheet.getStyleElement()}
           </>
         ),
       };
     } finally {
-      styledComponentSheets.seal();
+      sheet.seal();
     }
   }
 }

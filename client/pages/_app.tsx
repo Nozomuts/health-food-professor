@@ -9,21 +9,13 @@ import type {} from "styled-components/cssprop";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 
-config.autoAddCss = false;
+// config.autoAddCss = false;
 
 /**
  * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
  * 全体のラップ
  */
 export default function App({ Component, pageProps }: AppProps) {
-  // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
-  useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }, []);
-
   return (
     <RecoilRoot>
       <Reset />

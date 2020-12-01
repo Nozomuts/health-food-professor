@@ -23,10 +23,8 @@ const HeaderContainer = styled.div`
   background-color: black;
   color: lightgray;
   padding-left: 30px;
-  position: fixed;
   width: 100%;
   height: 100px;
-  z-index: 100;
   cursor: pointer;
   h3 {
     margin-left: 10px;

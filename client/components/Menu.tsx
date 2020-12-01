@@ -119,7 +119,7 @@ const Content = styled.div<{ active: boolean }>`
   ${({ active }) => !active && "display: none"}
 `;
 
-const IconButton = styled.button<{ disabled: boolean }>`
+const IconButton = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -132,12 +132,13 @@ const IconButton = styled.button<{ disabled: boolean }>`
   outline: none;
   position: absolute;
   top: calc(50% - 25px);
-  ${({ disabled }) =>
-    disabled &&
-    `
+  :disabled {
     opacity: 0.3;
     cursor: not-allowed;
-  `}
+  }
+  :hover {
+    opacity: 0.3;
+  }
 `;
 
 const Container = styled.div`

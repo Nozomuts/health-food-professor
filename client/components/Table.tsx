@@ -32,7 +32,7 @@ const TableContainer = styled.div`
   width: 430px;
   height: 300px;
   margin-left: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-radius: 5px;
   table {
       width:100%;

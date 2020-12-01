@@ -61,7 +61,7 @@ const Label = styled.label<{ include: boolean }>`
   cursor: pointer;
   border-radius: 5px;
   overflow: hidden;
-  ${({ include }) => include && `box-shadow: none; opacity: 0.3;`};
+  ${({ include }) => include && `box-shadow: 0 0 4px; opacity: 0.3;`};
   ${tab`
     width: 25%;
   `}
@@ -69,6 +69,9 @@ const Label = styled.label<{ include: boolean }>`
     width: 40%;
     margin: 5px;
   `}
+  :hover {
+    box-shadow: 2px 2px 7px 3px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 const ImgFrame = styled.div`
@@ -87,12 +90,17 @@ const ImgFrame = styled.div`
       height: 80px;
     }
   `};
+  :hover {
+    transform: scale(1.1, 1.1);
+    transition-duration: 0.5s;
+  }
 `;
 
 const TitleBox = styled.div`
   width: 100%;
   padding: 20px 18px;
   box-sizing: border-box;
+  font-weight: bold;
   ${tab`
     padding: 0 10px 10px 10px;
   `};

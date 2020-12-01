@@ -12,22 +12,16 @@ export const GenderRadio: FC<Props> = ({ register }) => {
       <ul>
         <ListItem>
           <label>
-            <OptionInput
-              type="radio"
-              name="gender"
-              ref={register}
-              value="0"
-              defaultChecked={true}
-            />
+            <OptionInput type="radio" name="gender" ref={register} value="0" />
             <Text>男性</Text>
           </label>
         </ListItem>
-        <li className="list_item">
+        <ListItem>
           <label>
             <OptionInput type="radio" name="gender" ref={register} value="1" />
             <Text>女性</Text>
           </label>
-        </li>
+        </ListItem>
       </ul>
     </RadioContainer>
   );
@@ -55,6 +49,10 @@ const RadioContainer = styled.div`
 const ListItem = styled.li`
   margin: 0 0 0.5rem 0;
   padding: 0;
+  :hover {
+    border-radius: 5px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const OptionInput = styled.input`

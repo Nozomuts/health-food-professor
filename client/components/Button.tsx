@@ -1,61 +1,45 @@
-import { relative } from "path";
 import React, { FC } from "react";
 import styled from "styled-components";
-import { sp } from "../styles/media";
 
 type Props = {
   type?: "button" | "submit";
   handle_click?: () => void;
+  loading?: boolean;
+  disabled?: boolean;
 };
+import { Spinner } from "../styles/common";
 
-export const Button: FC<Props> = ({ children, type, handle_click }) => {
+export const Button: FC<Props> = ({
+  children,
+  loading,
+  handle_click,
+  type,
+  disabled,
+}) => {
   return (
-    <StyledButton type={type} onClick={handle_click}>
-      <span>{children}</span>
-    </StyledButton>
+    <ToggleButton type={type} onClick={handle_click} disabled={disabled}>
+      {loading ? <Spinner /> : children}
+    </ToggleButton>
   );
 };
 
-const StyledButton = styled.button`
-  text-decoration: none;
-  overflow: hidden;
-  padding: 1.5rem 5rem;
-  background: #fff;
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 1.5;
-  position: relative;
-  display: inline-block;
+export const ToggleButton = styled.button`
+  margin-top: 30px;
+  font-weight: bold;
+  padding: 15px;
   border-radius: 5px;
-  border: #000 solid 1px;
-  width: 100%;
-  margin-top: 50px;
   cursor: pointer;
-  ${sp`
-    font-size: 15px;
-    margin-top: 20px;
-  `}
-  &:hover {
-    color: #fff;
+  outline: none;
+  font-size: 25px;
+  width: 100%;
+  color: white;
+  background-color: black;
+  border: black solid 1px;
+  :disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    -webkit-transform: translateX(-96%);
-    transform: translateX(-96%);
-    background: #000;
-  }
-  &:hover:before {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-  > span {
-    position: relative;
+  :hover {
+    opacity: 0.7;
   }
 `;

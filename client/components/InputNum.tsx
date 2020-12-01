@@ -8,7 +8,7 @@ type Props = {
 
 export const InputNum: FC<Props> = ({ register }) => {
   return (
-    <label>
+    <Label>
       <Text>上限</Text>
       <InputBox>
         <input
@@ -20,9 +20,13 @@ export const InputNum: FC<Props> = ({ register }) => {
           max={30}
         />
       </InputBox>
-    </label>
+    </Label>
   );
 };
+
+const Label = styled.label`
+  cursor: text;
+`;
 
 const InputBox = styled.div`
   width: 100%;
@@ -63,6 +67,11 @@ const InputBox = styled.div`
     color: black;
     font-size: 20px;
     border-radius: 5px;
+
+    :hover {
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    }
 
     &:focus {
       outline: none;

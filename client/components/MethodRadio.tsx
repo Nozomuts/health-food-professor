@@ -42,6 +42,10 @@ const InputContainer = styled.label<{ checked: boolean }>`
     border-radius: 5px;
   `}
   cursor: pointer;
+  transition: ease-in-out 0.3s;
+  :hover {
+    transform: scale(1.1, 1.1);
+  }
 `;
 
 const RadioButton = styled.input`

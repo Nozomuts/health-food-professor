@@ -119,6 +119,11 @@ const CloseButton = styled.a`
   cursor: pointer;
   padding: 10px;
   z-index: 100;
+  :hover {
+    svg {
+      background-color: rgba(255,0,0,.2);
+    }
+  }
 `;
 
 const ResetButton = styled.button`

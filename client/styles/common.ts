@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { pc, sp } from "./media";
 
 export const Row = styled.div`
@@ -29,4 +29,27 @@ export const Desc = styled.p`
   ${sp`
     font-size: 12px;
   `}
+`;
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Spinner = styled.div`
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+
+  border-top: 2px solid gray;
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+  border-left: 2px solid grey;
+  background: transparent;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 `;

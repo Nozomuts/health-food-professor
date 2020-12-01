@@ -38,6 +38,9 @@ const SelectContainer = styled.div`
   border-radius: 2px;
   background: #fff;
   border-radius: 5px;
+  :hover {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  }
   &::before {
     position: absolute;
     top: 20px;

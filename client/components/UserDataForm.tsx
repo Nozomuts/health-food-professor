@@ -29,7 +29,13 @@ type Props = {
  * 性別、年齢、上限などを入力するフォーム
  */
 export const UserDataForm: FC<Props> = ({ method }) => {
-  const { reset, register, handleSubmit, errors } = useForm<FormData>();
+  const {
+    reset,
+    register,
+    handleSubmit,
+    errors,
+    formState: { isSubmitting },
+  } = useForm<FormData>();
   const shop = useRecoilValue(shop_state);
   const menu = useRecoilValue(menu_value);
   const set_result_value = useSetRecoilState<ResultType>(result_value);
@@ -44,9 +50,12 @@ export const UserDataForm: FC<Props> = ({ method }) => {
           : menu.length > 0
           ? ["macdonalds", "dennys"]
           : [];
-      const res = await Axios.post("https://nutrient-app-server.herokuapp.com/api/check", {
-        data,
-      });
+      const res = await Axios.post(
+        "https://nutrient-app-server.herokuapp.com/api/check",
+        {
+          data,
+        }
+      );
       set_result_value(res.data);
       reset();
       router.push("/result");
@@ -74,7 +83,9 @@ export const UserDataForm: FC<Props> = ({ method }) => {
       </Box>
       <Desc>※ 入力内容によって結果が変化します。</Desc>
       <Desc>※ "上限"は1つのメニューの最大数を示します。</Desc>
-      <Button type="submit">診断する</Button>
+      <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
+        診断する
+      </Button>
     </Form>
   );
 };

@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sp } from "../styles/media";
+import { COLOR } from "../styles/colors";
 
 type Props = {
   icon: IconDefinition;
@@ -30,22 +31,25 @@ export const MethodRadio: FC<Props> = ({
 
 const InputContainer = styled.label<{ checked: boolean }>`
   position: relative;
-  height: 7rem;
+  height: 6rem;
   width: 50%;
   margin: 0.5rem;
   ${({ checked }) =>
     checked &&
     `
-    color: white;
+    color: ${COLOR.WHITE};
     transform: scale(1.1, 1.1);
-    background-color: black;
-    border-radius: 5px;
+    background-color: ${COLOR.BLACK};
+    border-radius: .5rem;
   `}
   cursor: pointer;
   transition: ease-in-out 0.3s;
   :hover {
     transform: scale(1.1, 1.1);
   }
+  ${sp`
+    height: 5rem;
+  `};
 `;
 
 const RadioButton = styled.input`
@@ -62,22 +66,22 @@ const RadioTile = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 1rem;
+  border: .2rem solid ${COLOR.BLACK};
+  border-radius: .5rem;
+  padding: .5rem;
   transition: transform 300ms ease;
 `;
 
 const RadioLabel = styled.p<{ checked: boolean }>`
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: black;
-  margin-left: 10px;
+  letter-spacing: .1rem;
+  color: ${COLOR.BLACK};
+  margin-left: .5rem;
   ${sp`
-    font-size: 11px;
+    font-size: .8rem;
   `};
-  ${({ checked }) => checked && `color: white;`};
+  ${({ checked }) => checked && `color: ${COLOR.WHITE};`};
 `;

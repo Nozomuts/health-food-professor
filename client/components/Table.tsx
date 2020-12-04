@@ -29,17 +29,17 @@ export const Table: FC<Props> = ({ result }) => {
 };
 
 const TableContainer = styled.div`
-  width: 430px;
-  height: 300px;
-  margin-left: 100px;
+  width: 43rem;
+  height: 30rem;
+  margin-left: 10rem;
   overflow-y: auto;
-  border-radius: 5px;
+  border-radius: .5rem;
   table {
-      width:100%;
+    width: 100%;
     th,
     td {
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 0.6em;
+      border: .1rem solid rgba(0, 0, 0, 0.1);
+      padding: 1rem;
       text-align: center;
     }
     th {
@@ -49,9 +49,9 @@ const TableContainer = styled.div`
     }
   }
   ${sp`
-    width: 300px;
+    width: 30rem;
     height: auto;
     overflow: hidden;
-    margin: 50px 0 0 0;
+    margin-top: 5rem;
   `}
 `;

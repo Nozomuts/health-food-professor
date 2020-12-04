@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { COLOR } from "../styles/colors";
 import { Text } from "../styles/common";
 
 type Props = {
@@ -30,26 +31,26 @@ const Label = styled.label`
 
 const InputBox = styled.div`
   width: 100%;
-  height: 50px;
+  height: 4rem;
   position: relative;
   pointer-events: none;
 
   &:before {
     position: absolute;
-    top: 8px;
-    right: 20px;
+    top: .6rem;
+    right: 1.5rem;
     color: #000;
-    font-size: 18px;
+    font-size: 1.5rem;
     content: "▲";
     pointer-events: none; // 当たり判定をなくす
   }
 
   &:after {
     position: absolute;
-    bottom: 8px;
-    right: 20px;
+    bottom: .4rem;
+    right: 1.5rem;
     color: #000;
-    font-size: 18px;
+    font-size: 1.5rem;
     content: "▼";
     pointer-events: none; // 当たり判定をなくす
   }
@@ -57,20 +58,19 @@ const InputBox = styled.div`
   input {
     box-sizing: border-box;
     display: block;
-    margin: 0 auto 40px;
-    border: 1px solid #bbbbbb;
-    padding: 20px 60px 20px 20px;
+    border: .1rem solid #bbbbbb;
+    padding: 2rem 6rem 2rem 2rem;
     width: 100%;
-    height: 50px;
+    height: 4rem;
     -webkit-appearance: none;
-    background-color: white;
-    color: black;
-    font-size: 20px;
-    border-radius: 5px;
+    background-color: ${COLOR.WHITE};
+    color: ${COLOR.BLACK};
+    font-size: 1.6rem;
+    border-radius: .5rem;
 
     :hover {
-      border-radius: 5px;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+      border-radius: .5rem;
+      box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.5);
     }
 
     &:focus {

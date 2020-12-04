@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { COLOR } from "../styles/colors";
 import { Text } from "../styles/common";
+import { sp } from "../styles/media";
 
 type Props = {
   register: any;
@@ -30,29 +32,43 @@ export const GenderRadio: FC<Props> = ({ register }) => {
 const RadioContainer = styled.div`
   text-align: left;
   > ul {
-    padding: 1rem 1rem;
+    padding: 1rem;
     list-style: none;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    height: 140px;
+    border: .1rem solid #cccccc;
+    border-radius: .5rem;
+    height: 12rem;
   }
   label {
     line-height: 135%;
     position: relative;
-    margin: 0.5rem;
+    margin: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
   }
+  ${sp`
+    > ul {
+      height: 4rem;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    label {
+      line-height: 30%;
+      margin: 0 .6rem;
+    }
+  `}
 `;
 
 const ListItem = styled.li`
-  margin: 0 0 0.5rem 0;
+  margin-bottom: 1rem;
   padding: 0;
   :hover {
-    border-radius: 5px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    opacity: 0.3;
   }
+  ${sp`
+    margin: 0;
+  `}
 `;
 
 const OptionInput = styled.input`
@@ -79,12 +95,12 @@ const OptionInput = styled.input`
     left: -0.25rem;
     width: 1.25rem;
     height: 1.25rem;
-    background: black;
+    background: ${COLOR.BLACK};
   }
   :checked:before {
     -webkit-transform: scale(0, 0);
     transform: scale(0, 0);
     border-width: 0.625rem;
-    border-color: black;
+    border-color: ${COLOR.BLACK};
   }
 `;

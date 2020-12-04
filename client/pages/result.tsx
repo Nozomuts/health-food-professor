@@ -31,7 +31,7 @@ export default function Result() {
       <Text
         css={`
           text-align: center;
-          margin-bottom: 50px;
+          margin-bottom: 5rem;
         `}>
         診断結果
       </Text>
@@ -61,12 +61,12 @@ const Container = styled.div`
 
 const H1 = styled.h1`
   text-align: center;
-  margin: 100px auto;
-  font-size: 30px;
+  margin: 10rem auto;
+  font-size: 3rem;
   font-weight: bold;
 `;
 
 const ButtonContainer = styled.div`
-  width: 300px;
+  width: 30rem;
   margin: 0 auto;
 `;

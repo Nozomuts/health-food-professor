@@ -13,21 +13,21 @@ export const Column = styled.div`
 `;
 
 export const Text = styled.p`
-  font-size: 20px;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: left;
-  margin: 10px 0;
+  margin: 1rem 0;
   ${sp`
-    font-size: 16px;
+    font-size: 1rem;
   `}
 `;
 
 export const Desc = styled.p`
   opacity: 0.7;
   text-align: left;
-  margin: 10px 0;
+  margin: 1rem 0;
   ${sp`
-    font-size: 12px;
+    font-size: .8rem;
   `}
 `;
 
@@ -44,12 +44,12 @@ export const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
   transform: translateZ(0);
 
-  border-top: 2px solid gray;
-  border-right: 2px solid gray;
-  border-bottom: 2px solid gray;
-  border-left: 2px solid grey;
+  border-top: .2rem solid gray;
+  border-right: .2rem solid gray;
+  border-bottom: .2rem solid gray;
+  border-left: .2rem solid grey;
   background: transparent;
-  width: 10px;
-  height: 10px;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
 `;

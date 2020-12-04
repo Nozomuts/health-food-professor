@@ -53,61 +53,62 @@ const ContainerHeader = styled.div`
 `;
 
 const Label = styled.div`
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-  margin: 10px;
-  height: 130px;
-  min-width: 130px;
-  width: 130px;
-  border-radius: 5px;
+  box-shadow: .2rem .2rem .6rem rgba(0, 0, 0, 0.4);
+  margin: 1rem;
+  height: 9rem;
+  min-width: 10rem;
+  width: 10rem;
+  border-radius: .5rem;
   position: relative;
   ${sp`
-    height: 90px;
-    width: 100px;
-    min-width: 100px;
+    height: 7rem;
+    width: 7rem;
+    min-width: 7rem;
+    margin: .5rem;
   `}
 `;
 
 const ImgFrame = styled.div`
   width: 100%;
-  height: auto;
   box-sizing: border-box;
-  padding-top: 20px;
+  padding-top: 2rem;
   ${sp`
     div {
-      height: 30px;
-      width: 100px;
+      height: 3rem;
+      width: 6rem;
     }
-    padding-top: 10px;
+    padding-top: 1rem;
   `}
 `;
 
 const TitleBox = styled.div`
   width: 100%;
   height: auto;
-  padding: 15px;
+  padding: 1rem;
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: 1rem;
   ${sp`
-    padding: 10px;
-    font-size: 8px;
+    padding: .5rem;
+    font-size: .8rem;
   `}
 `;
 
 const Container = styled.div`
   display: flex;
-  height: 200px;
+  height: 14rem;
   overflow-x: auto;
   overflow-y: hidden;
-  margin-bottom: 50px;
-  border: 1px solid #bbbbbb;
-  border-radius: 5px;
-  padding: 20px;
+  margin-bottom: 5rem;
+  border: .1rem solid #bbbbbb;
+  border-radius: .5rem;
+  padding: 1.5rem;
   position: relative;
   ${sp`
-    height: 230px;
-    padding: 0 10px;
+    height: 17rem;
+    padding: 0;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-bottom: 3rem;
   `}
 `;
 
@@ -117,16 +118,16 @@ const CloseButton = styled.a`
   top: 0;
   right: 0;
   cursor: pointer;
-  padding: 10px;
+  padding: .5rem;
   z-index: 100;
   :hover {
     svg {
-      background-color: rgba(255,0,0,.2);
+      opacity: 0.5;
     }
   }
 `;
 
 const ResetButton = styled.button`
   cursor: pointer;
-  margin: 8px 20px;
+  margin: .8rem 2rem;
 `;

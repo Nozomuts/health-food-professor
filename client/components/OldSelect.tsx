@@ -34,44 +34,43 @@ const SelectContainer = styled.div`
   width: 100%;
   text-align: center;
   position: relative;
-  border: 1px solid #bbbbbb;
-  border-radius: 2px;
+  border: .1rem solid #bbbbbb;
+  border-radius: .2rem;
   background: #fff;
-  border-radius: 5px;
+  border-radius: .5rem;
   :hover {
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.5);
   }
   &::before {
     position: absolute;
-    top: 20px;
-    right: 16px;
+    top: 1.6rem;
+    right: 1rem;
     width: 0;
     height: 0;
     padding: 0;
     content: "";
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #000;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-top: 1rem solid #000;
     pointer-events: none;
   }
   &::after {
     position: absolute;
     top: 0;
-    right: 50px;
+    right: 4rem;
     bottom: 0;
-    width: 1px;
+    width: .1rem;
     content: "";
-    border-left: 1px solid #000;
+    border-left: .1rem solid #000;
   }
   select {
     width: 100%;
-    height: 50px;
-    padding: 8px 38px 8px 8px;
-    font-size: 16px;
+    height: 4rem;
+    padding: .8rem 3.8rem .8rem .8rem;
+    font-size: 1rem;
     color: #000;
-    padding-right: 1em;
+    padding-right: 1.5rem;
     cursor: pointer;
-    text-indent: 0.01px;
     text-overflow: ellipsis;
     border: none;
     outline: none;

@@ -52,7 +52,7 @@ export const Menu = () => {
           css={`
             left: 0;
             ${sp`
-              left: -25px;
+              left: -1.5rem;
             `}
           `}
           disabled={page === 1}
@@ -68,7 +68,7 @@ export const Menu = () => {
           css={`
             right: 0;
             ${sp`
-              right: -25px;
+              right: -1.5rem;
             `}
           `}
           disabled={page === shop_list[active].menu.length}
@@ -92,24 +92,25 @@ const Tab = styled.button<{ active: boolean }>`
   cursor: pointer;
   width: 50%;
   position: relative;
-  font-size: 1em;
-  border-radius: 5px;
+  font-size: 1rem;
+  border-radius: .5rem;
+  font-weight: bold;
   ${({ active }) =>
     active
       ? `
-    border: 1px solid #ccc;
+    border: .1rem solid #ccc;
     border-bottom: none;
-    background-color: white;
-    height: 50px;
+    background-color: ${COLOR.WHITE};
+    height: 4rem;
   `
       : `
-    height: 45px;
-    top: 5px;
+    height: 3.5rem;
+    top: .5rem;
   `}
   transition: background-color 0.5s ease-in-out;
 
   :hover {
-    background-color: white;
+    background-color: ${COLOR.WHITE};
   }
 `;
 
@@ -126,12 +127,12 @@ const IconButton = styled.button`
   align-items: center;
   background-color: ${COLOR.BLACK};
   color: ${COLOR.WHITE};
-  width: 50px;
-  height: 50px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   outline: none;
   position: absolute;
-  top: calc(50% - 25px);
+  top: calc(50% - 2.5rem);
   :disabled {
     opacity: 0.3;
     cursor: not-allowed;
@@ -139,6 +140,10 @@ const IconButton = styled.button`
   :hover {
     opacity: 0.3;
   }
+  ${sp`
+    width: 2.5rem;
+    height: 2.5rem;
+  `}
 `;
 
 const Container = styled.div`
@@ -146,6 +151,5 @@ const Container = styled.div`
 `;
 
 const PageNum = styled.div`
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin: 2rem 0;
 `;

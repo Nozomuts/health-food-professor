@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import styled from "styled-components";
+import { COLOR } from "../styles/colors";
 
 export const Header = () => {
   const router = useRouter();
@@ -20,17 +21,17 @@ export const Header = () => {
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  background-color: black;
+  background-color: ${COLOR.BLACK};
   color: lightgray;
-  padding-left: 30px;
+  padding-left: 3rem;
   width: 100%;
-  height: 100px;
+  height: 6rem;
   cursor: pointer;
   h3 {
-    margin-left: 10px;
+    margin-left: 1rem;
   }
 `;
 
 const LayoutHeader = styled.div`
-  padding-bottom: 130px;
+  padding-bottom: 2rem;
 `;

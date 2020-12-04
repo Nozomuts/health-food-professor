@@ -91,7 +91,7 @@ export const UserDataForm: FC<Props> = ({ method }) => {
 };
 
 const Form = styled.form`
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 `;
 
 const Error = styled.p`
@@ -101,7 +101,7 @@ const Error = styled.p`
 
 const InputContainer = styled.div`
   flex: 1;
-  margin: 0 20px;
+  margin: 0 2rem;
   ${sp`
     margin: 0;
   `};

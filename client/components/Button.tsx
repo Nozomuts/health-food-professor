@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { COLOR } from "../styles/colors";
 
 type Props = {
   type?: "button" | "submit";
@@ -8,6 +9,7 @@ type Props = {
   disabled?: boolean;
 };
 import { Spinner } from "../styles/common";
+import { sp } from "../styles/media";
 
 export const Button: FC<Props> = ({
   children,
@@ -24,17 +26,17 @@ export const Button: FC<Props> = ({
 };
 
 export const ToggleButton = styled.button`
-  margin-top: 30px;
+  margin-top: 2rem;
   font-weight: bold;
-  padding: 15px;
-  border-radius: 5px;
+  padding: 1.5rem;
+  border-radius: .5rem;
   cursor: pointer;
   outline: none;
-  font-size: 25px;
+  font-size: 2rem;
   width: 100%;
-  color: white;
-  background-color: black;
-  border: black solid 1px;
+  color: ${COLOR.WHITE};
+  background-color: ${COLOR.BLACK};
+  border: ${COLOR.BLACK} solid .1rem;
   :disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -42,4 +44,8 @@ export const ToggleButton = styled.button`
   :hover {
     opacity: 0.7;
   }
+  ${sp`
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  `}
 `;

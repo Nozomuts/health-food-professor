@@ -50,12 +50,12 @@ export default function Home() {
 const Container = styled.div`
   text-align: center;
   width: 80%;
-  max-width: 900px;
+  max-width: 90rem;
   margin: 0 auto;
 `;
 
 const RadioGroup = styled.div`
   display: flex;
   justify-content: center;
-  margin: 50px 0;
+  margin: 2rem 0;
 `;

@@ -32,8 +32,6 @@ export const Chart: FC<Props> = ({ result }) => {
     return arr;
   };
 
-  console.log(data());
-
   return (
     <RadarChart
       cx={is_sp() ? 150 : 200}

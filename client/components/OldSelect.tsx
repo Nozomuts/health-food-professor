@@ -1,18 +1,21 @@
 import React, { FC } from "react";
+import { FieldError } from "react-hook-form";
 import styled from "styled-components";
-import { Text } from "../styles/common";
+import { COLOR } from "../styles/colors";
+import { Error, Text } from "../styles/common";
 import { old_options } from "../util/OldOptions";
 
 type Props = {
   register: any;
+  error: FieldError | undefined;
 };
 
-export const OldSelect: FC<Props> = ({ register }) => {
+export const OldSelect: FC<Props> = ({ register, error }) => {
   return (
     <Label>
-      <Text>年齢</Text>
-      <SelectContainer>
-        <select name="old" ref={register({ required: true })}>
+      <Text>年齢{error && <Error>※{error.message}</Error>}</Text>
+      <SelectContainer error={error !== undefined}>
+        <select name="old" ref={register}>
           {old_options.map(({ value, text, hidden }) => (
             <option key={value} value={value} hidden={hidden}>
               {text}
@@ -29,29 +32,28 @@ const Label = styled.label`
   flex-direction: column;
 `;
 
-const SelectContainer = styled.div`
+const SelectContainer = styled.div<{ error: boolean }>`
   overflow: hidden;
   width: 100%;
   text-align: center;
   position: relative;
-  border: .1rem solid #bbbbbb;
-  border-radius: .2rem;
+  border: 0.1rem solid #bbbbbb;
   background: #fff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   :hover {
-    box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.5);
+    background-color: ${COLOR.SMOKE};
   }
   &::before {
     position: absolute;
     top: 1.6rem;
-    right: 1rem;
+    right: 1.4rem;
     width: 0;
     height: 0;
     padding: 0;
     content: "";
-    border-left: 1rem solid transparent;
-    border-right: 1rem solid transparent;
-    border-top: 1rem solid #000;
+    border-left: 0.7rem solid transparent;
+    border-right: 0.7rem solid transparent;
+    border-top: 0.8rem solid #000;
     pointer-events: none;
   }
   &::after {
@@ -59,14 +61,14 @@ const SelectContainer = styled.div`
     top: 0;
     right: 4rem;
     bottom: 0;
-    width: .1rem;
+    width: 0.1rem;
     content: "";
-    border-left: .1rem solid #000;
+    border-left: 0.1rem solid #000;
   }
   select {
     width: 100%;
     height: 4rem;
-    padding: .8rem 3.8rem .8rem .8rem;
+    padding: 0.8rem 3.8rem 0.8rem 0.8rem;
     font-size: 1rem;
     color: #000;
     padding-right: 1.5rem;
@@ -83,4 +85,11 @@ const SelectContainer = styled.div`
       display: none;
     }
   }
+  ${({ error }) =>
+    error &&
+    `
+    border: .1rem solid ${COLOR.RED};
+    border-radius: .5rem;
+    background-color: rgba(255,0,0,0.1)
+  `}
 `;

@@ -1,22 +1,24 @@
 import React, { FC } from "react";
+import { FieldError } from "react-hook-form";
 import styled from "styled-components";
 import { COLOR } from "../styles/colors";
-import { Text } from "../styles/common";
+import { Error, Text } from "../styles/common";
 
 type Props = {
   register: any;
+  error: FieldError | undefined;
 };
 
-export const InputNum: FC<Props> = ({ register }) => {
+export const InputNum: FC<Props> = ({ register, error }) => {
   return (
     <Label>
-      <Text>上限</Text>
-      <InputBox>
+      <Text>上限{error && <Error>※{error.message}</Error>}</Text>
+      <InputBox error={error !== undefined}>
         <input
           type="number"
           name="up_value"
           defaultValue={5}
-          ref={register({ required: true })}
+          ref={register}
           min={1}
           max={30}
         />
@@ -29,28 +31,27 @@ const Label = styled.label`
   cursor: text;
 `;
 
-const InputBox = styled.div`
+const InputBox = styled.div<{ error: boolean }>`
   width: 100%;
-  height: 4rem;
   position: relative;
   pointer-events: none;
 
   &:before {
     position: absolute;
-    top: .6rem;
+    top: 0.6rem;
     right: 1.5rem;
     color: #000;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     content: "▲";
     pointer-events: none; // 当たり判定をなくす
   }
 
   &:after {
     position: absolute;
-    bottom: .4rem;
+    bottom: 0.6rem;
     right: 1.5rem;
     color: #000;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     content: "▼";
     pointer-events: none; // 当たり判定をなくす
   }
@@ -58,7 +59,7 @@ const InputBox = styled.div`
   input {
     box-sizing: border-box;
     display: block;
-    border: .1rem solid #bbbbbb;
+    border: 0.1rem solid #bbbbbb;
     padding: 2rem 6rem 2rem 2rem;
     width: 100%;
     height: 4rem;
@@ -66,11 +67,17 @@ const InputBox = styled.div`
     background-color: ${COLOR.WHITE};
     color: ${COLOR.BLACK};
     font-size: 1.3rem;
+    border-radius: 0.5rem;
+    ${({ error }) =>
+      error &&
+      `
+    border: .1rem solid ${COLOR.RED};
     border-radius: .5rem;
+    background-color: rgba(255,0,0,0.1)
+  `};
 
     :hover {
-      border-radius: .5rem;
-      box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.5);
+      background-color: ${COLOR.SMOKE};
     }
 
     &:focus {

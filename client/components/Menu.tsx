@@ -132,6 +132,7 @@ const IconButton = styled.button`
   border-radius: 50%;
   outline: none;
   position: absolute;
+  border: none;
   top: calc(50% - 2.5rem);
   :disabled {
     opacity: 0.3;

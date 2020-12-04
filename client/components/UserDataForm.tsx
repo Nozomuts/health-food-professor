@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { menu_value, ResultType, result_value, shop_state } from "../recoil";
-import { Text, Desc } from "../styles/common";
+import { Text, Desc, Error } from "../styles/common";
 import { sp } from "../styles/media";
 import { Button } from "./Button";
 import { GenderRadio } from "./GenderRadio";
@@ -66,24 +66,33 @@ export const UserDataForm: FC<Props> = ({ method }) => {
 
   return (
     <Form onSubmit={handleSubmit(on_submit)}>
-      {(errors.gender ||
-        errors.menu ||
-        errors.old ||
-        errors.shop ||
-        errors.up_value) && <Error>※ 全ての項目を入力してください。</Error>}
       <Box>
         <InputContainer>
-          <Text>性別</Text>
-          <GenderRadio register={register} />
+          <Text>
+            性別{errors.gender && <Error>※{errors.gender.message}</Error>}
+          </Text>
+          <GenderRadio
+            register={register({ required: "選択してください" })}
+            error={errors.gender}
+          />
         </InputContainer>
         <InputContainer>
-          <OldSelect register={register} />
-          <InputNum register={register} />
+          <OldSelect
+            register={register({ required: "選択してください" })}
+            error={errors.old}
+          />
+          <InputNum
+            register={register({ required: "入力してください" })}
+            error={errors.up_value}
+          />
         </InputContainer>
       </Box>
       <Desc>※ 入力内容によって結果が変化します。</Desc>
       <Desc>※ "上限"は1つのメニューの最大数を示します。</Desc>
-      <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
+      <Button
+        type="submit"
+        loading={isSubmitting}
+        disabled={isSubmitting || Object.values(errors).length > 0}>
         診断する
       </Button>
     </Form>
@@ -92,11 +101,6 @@ export const UserDataForm: FC<Props> = ({ method }) => {
 
 const Form = styled.form`
   margin-bottom: 2rem;
-`;
-
-const Error = styled.p`
-  color: red;
-  text-align: left;
 `;
 
 const InputContainer = styled.div`

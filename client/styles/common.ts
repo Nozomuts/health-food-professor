@@ -1,22 +1,12 @@
 import styled, { keyframes } from "styled-components";
-import { pc, sp } from "./media";
-
-export const Row = styled.div`
-  ${pc`
-      display: flex;
-  `}
-`;
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import { sp } from "./media";
 
 export const Text = styled.p`
   font-size: 1.3rem;
   font-weight: bold;
   text-align: left;
   margin: 1rem 0;
+  display: flex;
   ${sp`
     font-size: 1rem;
   `}
@@ -53,7 +43,14 @@ export const Spinner = styled.div`
   width: 3rem;
   height: 3rem;
   ${sp`
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
   `}
+`;
+
+export const Error = styled.p`
+  color: red;
+  text-align: left;
+  margin-left: 1rem;
+  font-weight: normal;
 `;

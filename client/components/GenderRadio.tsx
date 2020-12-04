@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { FieldError } from "react-hook-form";
 import styled from "styled-components";
 import { COLOR } from "../styles/colors";
 import { Text } from "../styles/common";
@@ -6,11 +7,12 @@ import { sp } from "../styles/media";
 
 type Props = {
   register: any;
+  error: FieldError | undefined;
 };
 
-export const GenderRadio: FC<Props> = ({ register }) => {
+export const GenderRadio: FC<Props> = ({ register, error }) => {
   return (
-    <RadioContainer>
+    <RadioContainer error={error !== undefined}>
       <ul>
         <ListItem>
           <label>
@@ -29,14 +31,21 @@ export const GenderRadio: FC<Props> = ({ register }) => {
   );
 };
 
-const RadioContainer = styled.div`
+const RadioContainer = styled.div<{ error: boolean }>`
   text-align: left;
   > ul {
     padding: 1rem;
     list-style: none;
-    border: .1rem solid #cccccc;
-    border-radius: .5rem;
+    border: 0.1rem solid #cccccc;
+    border-radius: 0.5rem;
     height: 12rem;
+    ${({ error }) =>
+      error &&
+      `
+    border: .1rem solid ${COLOR.RED};
+    border-radius: .5rem;
+    background-color: rgba(255,0,0,0.1)
+  `};
   }
   label {
     line-height: 135%;

@@ -31,7 +31,6 @@ export default function Result() {
       <Text
         css={`
           text-align: center;
-          margin-bottom: 5rem;
         `}>
         診断結果
       </Text>
@@ -53,20 +52,18 @@ export default function Result() {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  ${sp`
-    flex-direction: column;
-  `}
 `;
 
 const H1 = styled.h1`
   text-align: center;
-  margin: 10rem auto;
-  font-size: 3rem;
+  margin: 5rem auto;
+  font-size: 1.5rem;
   font-weight: bold;
 `;
 
 const ButtonContainer = styled.div`
-  width: 30rem;
+  width: 18rem;
   margin: 0 auto;
 `;

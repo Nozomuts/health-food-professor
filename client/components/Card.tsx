@@ -84,7 +84,6 @@ const ImgFrame = styled.div`
     }
   `};
   ${sp`
-    padding-top: 0;
     div {
       height: 4rem;
     }
@@ -101,6 +100,6 @@ const TitleBox = styled.div`
   `};
   ${sp`
     font-size: .7rem;
-    padding: 0 .7rem .7rem .7rem;
+    padding: .7rem;
   `};
 `;

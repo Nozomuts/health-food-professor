@@ -40,9 +40,12 @@ export const ToggleButton = styled.button`
   :disabled {
     cursor: not-allowed;
     opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   :hover {
-    opacity: 0.7;
+    opacity: 0.5;
   }
   ${sp`
     font-size: 1.2rem;

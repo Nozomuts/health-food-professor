@@ -65,7 +65,7 @@ const InputBox = styled.div`
     -webkit-appearance: none;
     background-color: ${COLOR.WHITE};
     color: ${COLOR.BLACK};
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     border-radius: .5rem;
 
     :hover {

@@ -29,11 +29,12 @@ export const Table: FC<Props> = ({ result }) => {
 };
 
 const TableContainer = styled.div`
-  width: 43rem;
+  width: 30rem;
   height: 30rem;
-  margin-left: 10rem;
   overflow-y: auto;
   border-radius: .5rem;
+  display: flex;
+  align-items: center;
   table {
     width: 100%;
     th,
@@ -49,9 +50,9 @@ const TableContainer = styled.div`
     }
   }
   ${sp`
-    width: 30rem;
+    width: 18rem;
     height: auto;
     overflow: hidden;
-    margin-top: 5rem;
+    margin-top: 3rem;
   `}
 `;

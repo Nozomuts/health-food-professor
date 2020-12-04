@@ -44,12 +44,16 @@ export const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
   transform: translateZ(0);
 
-  border-top: .2rem solid gray;
-  border-right: .2rem solid gray;
-  border-bottom: .2rem solid gray;
-  border-left: .2rem solid grey;
+  border-top: 0.2rem solid gray;
+  border-right: 0.2rem solid gray;
+  border-bottom: 0.2rem solid gray;
+  border-left: 0.2rem solid white;
   background: transparent;
-  width: 1rem;
-  height: 1rem;
   border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  ${sp`
+    width: 1rem;
+    height: 1rem;
+  `}
 `;

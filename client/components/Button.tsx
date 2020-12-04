@@ -1,61 +1,54 @@
-import { relative } from "path";
 import React, { FC } from "react";
 import styled from "styled-components";
-import { sp } from "../styles/media";
+import { COLOR } from "../styles/colors";
 
 type Props = {
   type?: "button" | "submit";
   handle_click?: () => void;
+  loading?: boolean;
+  disabled?: boolean;
 };
+import { Spinner } from "../styles/common";
+import { sp } from "../styles/media";
 
-export const Button: FC<Props> = ({ children, type, handle_click }) => {
+export const Button: FC<Props> = ({
+  children,
+  loading,
+  handle_click,
+  type,
+  disabled,
+}) => {
   return (
-    <StyledButton type={type} onClick={handle_click}>
-      <span>{children}</span>
-    </StyledButton>
+    <ToggleButton type={type} onClick={handle_click} disabled={disabled}>
+      {loading ? <Spinner /> : children}
+    </ToggleButton>
   );
 };
 
-const StyledButton = styled.button`
-  text-decoration: none;
-  overflow: hidden;
-  padding: 1.5rem 5rem;
-  background: #fff;
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 1.5;
-  position: relative;
-  display: inline-block;
-  border-radius: 5px;
-  border: #000 solid 1px;
-  width: 100%;
-  margin-top: 50px;
+export const ToggleButton = styled.button`
+  margin-top: 2rem;
+  font-weight: bold;
+  padding: 1.5rem;
+  border-radius: .5rem;
   cursor: pointer;
+  outline: none;
+  font-size: 2rem;
+  width: 100%;
+  color: ${COLOR.WHITE};
+  background-color: ${COLOR.BLACK};
+  border: ${COLOR.BLACK} solid .1rem;
+  :disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  :hover {
+    opacity: 0.5;
+  }
   ${sp`
-    font-size: 15px;
-    margin-top: 20px;
+    font-size: 1.2rem;
+    margin-top: 1rem;
   `}
-  &:hover {
-    color: #fff;
-  }
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    -webkit-transform: translateX(-96%);
-    transform: translateX(-96%);
-    background: #000;
-  }
-  &:hover:before {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-  > span {
-    position: relative;
-  }
 `;

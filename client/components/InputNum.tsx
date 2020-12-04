@@ -1,51 +1,57 @@
 import React, { FC } from "react";
+import { FieldError } from "react-hook-form";
 import styled from "styled-components";
-import { Text } from "../styles/common";
+import { COLOR } from "../styles/colors";
+import { Error, Text } from "../styles/common";
 
 type Props = {
   register: any;
+  error: FieldError | undefined;
 };
 
-export const InputNum: FC<Props> = ({ register }) => {
+export const InputNum: FC<Props> = ({ register, error }) => {
   return (
-    <label>
-      <Text>上限</Text>
-      <InputBox>
+    <Label>
+      <Text>上限{error && <Error>※{error.message}</Error>}</Text>
+      <InputBox error={error !== undefined}>
         <input
           type="number"
           name="up_value"
           defaultValue={5}
-          ref={register({ required: true })}
+          ref={register}
           min={1}
           max={30}
         />
       </InputBox>
-    </label>
+    </Label>
   );
 };
 
-const InputBox = styled.div`
+const Label = styled.label`
+  cursor: text;
+`;
+
+const InputBox = styled.div<{ error: boolean }>`
   width: 100%;
-  height: 50px;
   position: relative;
   pointer-events: none;
 
   &:before {
     position: absolute;
-    top: 8px;
-    right: 20px;
-    color: #000;
-    font-size: 18px;
+    top: 0.6rem;
+    right: 1.5rem;
+    color: ${COLOR.BLACK};
+    font-size: 1.2rem;
     content: "▲";
     pointer-events: none; // 当たり判定をなくす
   }
 
   &:after {
     position: absolute;
-    bottom: 8px;
-    right: 20px;
-    color: #000;
-    font-size: 18px;
+    bottom: 0.6rem;
+    right: 1.5rem;
+    color: ${COLOR.BLACK};
+    font-size: 1.2rem;
     content: "▼";
     pointer-events: none; // 当たり判定をなくす
   }
@@ -53,16 +59,26 @@ const InputBox = styled.div`
   input {
     box-sizing: border-box;
     display: block;
-    margin: 0 auto 40px;
-    border: 1px solid #bbbbbb;
-    padding: 20px 60px 20px 20px;
+    border: 0.1rem solid ${COLOR.LIGHT_GRAY};
+    padding: 2rem 6rem 2rem 2rem;
     width: 100%;
-    height: 50px;
+    height: 4rem;
     -webkit-appearance: none;
-    background-color: white;
-    color: black;
-    font-size: 20px;
-    border-radius: 5px;
+    background-color: ${COLOR.WHITE};
+    color: ${COLOR.BLACK};
+    font-size: 1.3rem;
+    border-radius: 0.5rem;
+    ${({ error }) =>
+      error &&
+      `
+    border: .1rem solid ${COLOR.RED};
+    border-radius: .5rem;
+    background-color: rgba(255,0,0,0.1)
+  `};
+
+    :hover {
+      background-color: ${COLOR.SMOKE};
+    }
 
     &:focus {
       outline: none;

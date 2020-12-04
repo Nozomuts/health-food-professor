@@ -7,6 +7,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
 } from "recharts";
+import { COLOR } from "../styles/colors";
 import { is_sp } from "../styles/media";
 
 type Props = {
@@ -32,8 +33,6 @@ export const Chart: FC<Props> = ({ result }) => {
     return arr;
   };
 
-  console.log(data());
-
   return (
     <RadarChart
       cx={is_sp() ? 150 : 200}
@@ -53,14 +52,14 @@ export const Chart: FC<Props> = ({ result }) => {
       <Radar
         name="充足率[%]"
         dataKey="A"
-        stroke="#8884d8"
-        fill="#8884d8"
+        stroke={`${COLOR.PURPLE}`}
+        fill={`${COLOR.PURPLE}`}
         fillOpacity={0.6}
       />
       <Radar
         name="100%"
         dataKey="B"
-        stroke="red"
+        stroke={`${COLOR.RED}`}
         fill="transparent"
         fillOpacity={0.6}
       />

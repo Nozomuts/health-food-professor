@@ -9,7 +9,7 @@ import type {} from "styled-components/cssprop";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 
-// config.autoAddCss = false;
+config.autoAddCss = false;
 
 /**
  * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする

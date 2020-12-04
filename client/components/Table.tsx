@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { COLOR } from "../styles/colors";
 import { sp } from "../styles/media";
 
 type Props = {
@@ -29,29 +30,30 @@ export const Table: FC<Props> = ({ result }) => {
 };
 
 const TableContainer = styled.div`
-  width: 430px;
-  height: 300px;
-  margin-left: 100px;
-  overflow-y: scroll;
-  border-radius: 5px;
+  width: 30rem;
+  height: 30rem;
+  overflow-y: auto;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
   table {
-      width:100%;
+    width: 100%;
     th,
     td {
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 0.6em;
+      border: 0.1rem solid rgba(0, 0, 0, 0.1);
+      padding: 1rem;
       text-align: center;
     }
     th {
-      background: #000;
-      color: #fff;
+      background: ${COLOR.BLACK};
+      color: ${COLOR.WHITE};
       font-weight: bold;
     }
   }
   ${sp`
-    width: 300px;
+    width: 18rem;
     height: auto;
     overflow: hidden;
-    margin: 50px 0 0 0;
+    margin-top: 3rem;
   `}
 `;

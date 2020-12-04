@@ -1,18 +1,21 @@
 import React, { FC } from "react";
+import { FieldError } from "react-hook-form";
 import styled from "styled-components";
-import { Text } from "../styles/common";
+import { COLOR } from "../styles/colors";
+import { Error, Text } from "../styles/common";
 import { old_options } from "../util/OldOptions";
 
 type Props = {
   register: any;
+  error: FieldError | undefined;
 };
 
-export const OldSelect: FC<Props> = ({ register }) => {
+export const OldSelect: FC<Props> = ({ register, error }) => {
   return (
     <Label>
-      <Text>年齢</Text>
-      <SelectContainer>
-        <select name="old" ref={register({ required: true })}>
+      <Text>年齢{error && <Error>※{error.message}</Error>}</Text>
+      <SelectContainer error={error !== undefined}>
+        <select name="old" ref={register}>
           {old_options.map(({ value, text, hidden }) => (
             <option key={value} value={value} hidden={hidden}>
               {text}
@@ -29,46 +32,47 @@ const Label = styled.label`
   flex-direction: column;
 `;
 
-const SelectContainer = styled.div`
+const SelectContainer = styled.div<{ error: boolean }>`
   overflow: hidden;
   width: 100%;
   text-align: center;
   position: relative;
-  border: 1px solid #bbbbbb;
-  border-radius: 2px;
-  background: #fff;
-  border-radius: 5px;
+  border: 0.1rem solid ${COLOR.LIGHT_GRAY};
+  background: ${COLOR.WHITE};
+  border-radius: 0.5rem;
+  :hover {
+    background-color: ${COLOR.SMOKE};
+  }
   &::before {
     position: absolute;
-    top: 20px;
-    right: 16px;
+    top: 1.6rem;
+    right: 1.4rem;
     width: 0;
     height: 0;
     padding: 0;
     content: "";
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #000;
+    border-left: 0.7rem solid transparent;
+    border-right: 0.7rem solid transparent;
+    border-top: 0.8rem solid ${COLOR.BLACK};
     pointer-events: none;
   }
   &::after {
     position: absolute;
     top: 0;
-    right: 50px;
+    right: 4rem;
     bottom: 0;
-    width: 1px;
+    width: 0.1rem;
     content: "";
-    border-left: 1px solid #000;
+    border-left: 0.1rem solid ${COLOR.BLACK};
   }
   select {
     width: 100%;
-    height: 50px;
-    padding: 8px 38px 8px 8px;
-    font-size: 16px;
-    color: #000;
-    padding-right: 1em;
+    height: 4rem;
+    padding: 0.8rem 3.8rem 0.8rem 0.8rem;
+    font-size: 1rem;
+    color: ${COLOR.BLACK};
+    padding-right: 1.5rem;
     cursor: pointer;
-    text-indent: 0.01px;
     text-overflow: ellipsis;
     border: none;
     outline: none;
@@ -81,4 +85,11 @@ const SelectContainer = styled.div`
       display: none;
     }
   }
+  ${({ error }) =>
+    error &&
+    `
+    border: .1rem solid ${COLOR.RED};
+    border-radius: .5rem;
+    background-color: rgba(255,0,0,0.1)
+  `}
 `;

@@ -56,48 +56,50 @@ export const Card: FC<Props> = ({ name, is_shop, value }) => {
 
 const Label = styled.label<{ include: boolean }>`
   width: 30%;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-  margin: 10px;
+  box-shadow: .2rem .2rem .6rem rgba(0, 0, 0, 0.4);
+  margin: 1rem;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: .5rem;
   overflow: hidden;
-  ${({ include }) => include && `box-shadow: none; opacity: 0.3;`};
+  ${({ include }) => include && `box-shadow: 0 0 .4rem; opacity: 0.3;`};
   ${tab`
     width: 25%;
   `}
   ${sp`
     width: 40%;
-    margin: 5px;
+    margin: .5rem;
   `}
+  :hover {
+    box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const ImgFrame = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-top: 20px;
+  padding-top: 1rem;
   ${tab`
-    padding-top: 0;
     div {
-      height: 100px;
+      height: 7rem;
     }
   `};
   ${sp`
-    padding-top: 0;
     div {
-      height: 80px;
+      height: 4rem;
     }
   `};
 `;
 
 const TitleBox = styled.div`
   width: 100%;
-  padding: 20px 18px;
+  padding: 2rem 1.8rem;
   box-sizing: border-box;
+  font-weight: bold;
   ${tab`
-    padding: 0 10px 10px 10px;
+    padding: 1rem;
   `};
   ${sp`
-    font-size: 12px;
-    padding: 0 10px 10px 10px;
+    font-size: .7rem;
+    padding: .7rem;
   `};
 `;

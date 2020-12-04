@@ -1,4 +1,3 @@
-import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import { useRouter } from "next/dist/client/router";
 import React, { FC, useEffect, useRef, useState } from "react";

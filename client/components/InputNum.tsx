@@ -40,7 +40,7 @@ const InputBox = styled.div<{ error: boolean }>`
     position: absolute;
     top: 0.6rem;
     right: 1.5rem;
-    color: #000;
+    color: ${COLOR.BLACK};
     font-size: 1.2rem;
     content: "▲";
     pointer-events: none; // 当たり判定をなくす
@@ -50,7 +50,7 @@ const InputBox = styled.div<{ error: boolean }>`
     position: absolute;
     bottom: 0.6rem;
     right: 1.5rem;
-    color: #000;
+    color: ${COLOR.BLACK};
     font-size: 1.2rem;
     content: "▼";
     pointer-events: none; // 当たり判定をなくす
@@ -59,7 +59,7 @@ const InputBox = styled.div<{ error: boolean }>`
   input {
     box-sizing: border-box;
     display: block;
-    border: 0.1rem solid #bbbbbb;
+    border: 0.1rem solid ${COLOR.LIGHT_GRAY};
     padding: 2rem 6rem 2rem 2rem;
     width: 100%;
     height: 4rem;

@@ -96,7 +96,7 @@ const OptionInput = styled.input`
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     border-radius: 50%;
-    background: #ffffff;
+    background: ${COLOR.WHITE};
   }
   ::after {
     z-index: 0;

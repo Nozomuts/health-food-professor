@@ -1,16 +1,8 @@
 export const COLOR = {
   RED: "#FF0000",
-  ORANGE: "#FFA500",
-  YELLOW: "#FFFF00",
-  GREENYELLOW: "#ADFF2F",
-  GREEN: "#008000",
-  BLUE: "#0000FF",
-  SKYBLUE: "#87CEEB",
-  PURPLE: "#800080",
-  PINK: "#FFC0CB",
-  BROWN: "#A52A2A",
+  PURPLE: "#8884d8",
   WHITE: "#FFFFFF",
   SMOKE: "#F5F5F5",
-  GRAY: "#808080",
+  LIGHT_GRAY: "#BBBBBB",
   BLACK: "#000000",
 } as const;

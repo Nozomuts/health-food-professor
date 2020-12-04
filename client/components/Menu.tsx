@@ -83,7 +83,7 @@ export const Menu = () => {
 
 const Tabs = styled.div`
   overflow: hidden;
-  background: #fff;
+  background: ${COLOR.WHITE};
 `;
 
 const Tab = styled.button<{ active: boolean }>`
@@ -93,7 +93,7 @@ const Tab = styled.button<{ active: boolean }>`
   width: 50%;
   position: relative;
   font-size: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   font-weight: bold;
   ${({ active }) =>
     active

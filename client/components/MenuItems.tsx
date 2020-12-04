@@ -4,12 +4,11 @@ import { Card } from "./Card";
 
 type Props = {
   menu: { name: string }[];
-  active: boolean;
 };
 
-export const MenuItem: FC<Props> = ({ menu, active }) => {
+export const MenuItem: FC<Props> = ({ menu }) => {
   return (
-    <Page active={active}>
+    <Page>
       {menu.map(({ name }) => (
         <Card name={name} key={name} />
       ))}
@@ -17,9 +16,8 @@ export const MenuItem: FC<Props> = ({ menu, active }) => {
   );
 };
 
-const Page = styled.div<{ active: boolean }>`
+const Page = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  ${({ active }) => !active && `display: none;`};
 `;

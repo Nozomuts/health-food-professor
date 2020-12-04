@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { COLOR } from "./colors";
 import { sp } from "./media";
 
 export const Text = styled.p`
@@ -49,7 +50,7 @@ export const Spinner = styled.div`
 `;
 
 export const Error = styled.p`
-  color: red;
+  color: ${COLOR.RED};
   text-align: left;
   margin-left: 1rem;
   font-weight: normal;

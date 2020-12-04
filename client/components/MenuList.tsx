@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styled from "styled-components";
+import SwipeableViews from "react-swipeable-views";
 import { MenuItem } from "./MenuItems";
 
 type Props = {
@@ -9,10 +9,10 @@ type Props = {
 
 export const MenuList: FC<Props> = ({ menu, page }) => {
   return (
-    <div>
+    <SwipeableViews index={page - 1}>
       {menu.map((menu, i) => (
-        <MenuItem key={i} menu={menu} active={page === i + 1} />
+        <MenuItem key={i} menu={menu} />
       ))}
-    </div>
+    </SwipeableViews>
   );
 };

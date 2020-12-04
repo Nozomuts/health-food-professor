@@ -37,8 +37,8 @@ const SelectContainer = styled.div<{ error: boolean }>`
   width: 100%;
   text-align: center;
   position: relative;
-  border: 0.1rem solid #bbbbbb;
-  background: #fff;
+  border: 0.1rem solid ${COLOR.LIGHT_GRAY};
+  background: ${COLOR.WHITE};
   border-radius: 0.5rem;
   :hover {
     background-color: ${COLOR.SMOKE};
@@ -53,7 +53,7 @@ const SelectContainer = styled.div<{ error: boolean }>`
     content: "";
     border-left: 0.7rem solid transparent;
     border-right: 0.7rem solid transparent;
-    border-top: 0.8rem solid #000;
+    border-top: 0.8rem solid ${COLOR.BLACK};
     pointer-events: none;
   }
   &::after {
@@ -63,14 +63,14 @@ const SelectContainer = styled.div<{ error: boolean }>`
     bottom: 0;
     width: 0.1rem;
     content: "";
-    border-left: 0.1rem solid #000;
+    border-left: 0.1rem solid ${COLOR.BLACK};
   }
   select {
     width: 100%;
     height: 4rem;
     padding: 0.8rem 3.8rem 0.8rem 0.8rem;
     font-size: 1rem;
-    color: #000;
+    color: ${COLOR.BLACK};
     padding-right: 1.5rem;
     cursor: pointer;
     text-overflow: ellipsis;

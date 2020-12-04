@@ -7,6 +7,7 @@ import { sp } from "../styles/media";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Text } from "../styles/common";
+import { COLOR } from "../styles/colors";
 
 export const SelectedMenu = () => {
   const [menu, set_menu] = useRecoilState(menu_value);
@@ -53,12 +54,12 @@ const ContainerHeader = styled.div`
 `;
 
 const Label = styled.div`
-  box-shadow: .2rem .2rem .6rem rgba(0, 0, 0, 0.4);
+  box-shadow: 0.2rem 0.2rem 0.6rem rgba(0, 0, 0, 0.4);
   margin: 1rem;
   height: 9rem;
   min-width: 10rem;
   width: 10rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   position: relative;
   ${sp`
     height: 7rem;
@@ -99,8 +100,8 @@ const Container = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   margin-bottom: 5rem;
-  border: .1rem solid #bbbbbb;
-  border-radius: .5rem;
+  border: 0.1rem solid ${COLOR.LIGHT_GRAY};
+  border-radius: 0.5rem;
   padding: 1.5rem;
   position: relative;
   ${sp`
@@ -113,12 +114,12 @@ const Container = styled.div`
 `;
 
 const CloseButton = styled.a`
-  color: red;
+  color: ${COLOR.RED};
   position: absolute;
   top: 0;
   right: 0;
   cursor: pointer;
-  padding: .5rem;
+  padding: 0.5rem;
   z-index: 100;
   :hover {
     svg {
@@ -129,5 +130,5 @@ const CloseButton = styled.a`
 
 const ResetButton = styled.button`
   cursor: pointer;
-  margin: .8rem 2rem;
+  margin: 0.8rem 2rem;
 `;

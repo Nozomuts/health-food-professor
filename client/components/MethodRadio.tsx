@@ -1,4 +1,4 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
 import React, { FC } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,26 +6,27 @@ import { sp } from "../styles/media";
 import { COLOR } from "../styles/colors";
 
 type Props = {
-  icon: IconDefinition;
-  label: string;
-  checked: boolean;
-  handle_click: () => void;
+  method: "menu" | "shop";
+  set_method: React.Dispatch<React.SetStateAction<"menu" | "shop">>;
 };
 
-export const MethodRadio: FC<Props> = ({
-  icon,
-  label,
-  checked,
-  handle_click,
-}) => {
+export const MethodRadio: FC<Props> = ({ method, set_method }) => {
+  const radio_list = [
+    { icon: faBookOpen, label: "メニューから選択", value: "menu" },
+    { icon: faStore, label: "店から選択", value: "shop" },
+  ] as const;
   return (
-    <InputContainer checked={checked}>
-      <RadioButton type="radio" onClick={handle_click} checked={checked} />
-      <RadioTile>
-        <FontAwesomeIcon icon={icon} />
-        <RadioLabel checked={checked}>{label}</RadioLabel>
-      </RadioTile>
-    </InputContainer>
+    <RadioGroup>
+      {radio_list.map(({ icon, label, value }) => (
+        <InputContainer checked={method === value}>
+          <RadioButton type="radio" onClick={() => set_method(value)} />
+          <RadioTile>
+            <FontAwesomeIcon icon={icon} />
+            <RadioLabel checked={method === value}>{label}</RadioLabel>
+          </RadioTile>
+        </InputContainer>
+      ))}
+    </RadioGroup>
   );
 };
 
@@ -66,9 +67,9 @@ const RadioTile = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  border: .2rem solid ${COLOR.BLACK};
-  border-radius: .5rem;
-  padding: .5rem;
+  border: 0.2rem solid ${COLOR.BLACK};
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   transition: transform 300ms ease;
 `;
 
@@ -77,11 +78,17 @@ const RadioLabel = styled.p<{ checked: boolean }>`
   font-size: 1.3rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   color: ${COLOR.BLACK};
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   ${sp`
     font-size: .8rem;
   `};
   ${({ checked }) => checked && `color: ${COLOR.WHITE};`};
+`;
+
+const RadioGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
 `;

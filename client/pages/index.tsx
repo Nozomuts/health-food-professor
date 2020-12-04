@@ -1,20 +1,95 @@
-import styled from "styled-components";
-import { UserDataForm } from "../components/UserDataForm";
-import { Menu } from "../components/Menu";
-import { SelectedMenu } from "../components/SelectedMenu";
-import { MethodRadio } from "../components/MethodRadio";
 import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { Desc, Text } from "../styles/common";
+import Axios from "axios";
+import { useRouter } from "next/dist/client/router";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
+import { Button } from "../components/Button";
+import { GenderRadio } from "../components/GenderRadio";
+import { InputNum } from "../components/InputNum";
+import { Menu } from "../components/Menu";
+import { MethodRadio } from "../components/MethodRadio";
+import { OldSelect } from "../components/OldSelect";
+import { SelectedMenu } from "../components/SelectedMenu";
 import { Shop } from "../components/Shop";
-import { useEffect } from "react";
+import { menu_value, ResultType, result_value, shop_state } from "../recoil";
+import { Text, Desc, Error } from "../styles/common";
+import { sp } from "../styles/media";
+
+export type FormData = {
+  gender: string;
+  old: string;
+  up_value: string;
+  menu: string[];
+  shop: string[];
+};
 
 export default function Home() {
-  const [method, set_method] = useState<"menu" | "shop">("menu");
-
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
+  const {
+    reset,
+    register,
+    handleSubmit,
+    errors,
+    setError,
+    clearErrors,
+    formState: { isSubmitting },
+  } = useForm<FormData>();
+  const shop = useRecoilValue(shop_state);
+  const menu = useRecoilValue(menu_value);
+  const set_result_value = useSetRecoilState<ResultType>(result_value);
+
+  const router = useRouter();
+  const [method, set_method] = useState<"menu" | "shop">("menu");
+  const first_ref = useRef<HTMLDivElement>(null);
+  const second_ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (errors.menu && (menu.length > 0 || shop.length > 0)) {
+      clearErrors("menu");
+    }
+  }, [menu, shop]);
+
+  useEffect(() => {
+    if (errors.old || errors.gender || errors.up_value)
+      second_ref.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+  }, [errors.old, errors.gender, errors.up_value]);
+
+  const on_submit = async (data: FormData) => {
+    try {
+      data["menu"] = menu;
+      if (method === "shop" && shop.length > 0) data["shop"] = shop;
+      else if (method === "menu" && menu.length > 0) {
+        data["menu"] = menu;
+        data["shop"] = ["macdonalds", "dennys"];
+      } else {
+        setError("menu", { type: "required" });
+        first_ref.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        return;
+      }
+      const res = await Axios.post(
+        "https://nutrient-app-server.herokuapp.com/api/check",
+        {
+          data,
+        }
+      );
+      set_result_value(res.data);
+      reset();
+      router.push("/result");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <Container>
@@ -23,26 +98,52 @@ export default function Home() {
         あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
       </Text>
       <br />
-      <Text>1.メニューまたは店の種類を選択してください。</Text>
+      <Text
+        ref={first_ref}
+        css={`
+          ${sp`flex-direction: column; p { margin: .5rem 0 0 0; }`}
+        `}>
+        1.メニューまたは店の種類を選択
+        {errors.menu && (
+          <Error>※メニューまたは店を1つ以上選択してください</Error>
+        )}
+      </Text>
       <Desc>※ 店を選択した場合は店の全メニューから計算されます。</Desc>
-      <RadioGroup>
-        <MethodRadio
-          icon={faBookOpen}
-          label="メニューから選択"
-          checked={method === "menu"}
-          handle_click={() => set_method("menu")}
-        />
-        <MethodRadio
-          icon={faStore}
-          label="店から選択"
-          checked={method === "shop"}
-          handle_click={() => set_method("shop")}
-        />
-      </RadioGroup>
+      <MethodRadio method={method} set_method={set_method} />
       {method === "menu" ? <Menu /> : <Shop />}
       {method === "menu" && <SelectedMenu />}
-      <Text>2.基本情報を入力</Text>
-      <UserDataForm method={method} />
+      <Text ref={second_ref}>2.基本情報を入力</Text>
+      <Form onSubmit={handleSubmit(on_submit)}>
+        <Box>
+          <InputContainer>
+            <Text>
+              性別{errors.gender && <Error>※{errors.gender.message}</Error>}
+            </Text>
+            <GenderRadio
+              register={register({ required: "選択してください" })}
+              error={errors.gender}
+            />
+          </InputContainer>
+          <InputContainer>
+            <OldSelect
+              register={register({ required: "選択してください" })}
+              error={errors.old}
+            />
+            <InputNum
+              register={register({ required: "入力してください" })}
+              error={errors.up_value}
+            />
+          </InputContainer>
+        </Box>
+        <Desc>※ 入力内容によって結果が変化します。</Desc>
+        <Desc>※ "上限"は1つのメニューの最大数を示します。</Desc>
+        <Button
+          type="submit"
+          loading={isSubmitting}
+          disabled={isSubmitting || Object.values(errors).length > 0}>
+          診断する
+        </Button>
+      </Form>
     </Container>
   );
 }
@@ -54,8 +155,21 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const RadioGroup = styled.div`
+const Form = styled.form`
+  margin-bottom: 2rem;
+`;
+
+const InputContainer = styled.div`
+  flex: 1;
+  margin: 0 2rem;
+  ${sp`
+    margin: 0;
+  `};
+`;
+
+const Box = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 2rem 0;
+  ${sp`
+    flex-direction: column;
+  `};
 `;

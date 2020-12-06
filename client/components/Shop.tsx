@@ -12,6 +12,10 @@ export const Shop = () => {
       name: "デニーズ",
       value: "dennys",
     },
+    {
+      name: "モスバーガー",
+      value: "mos",
+    },
   ];
 
   return (
@@ -26,5 +30,6 @@ export const Shop = () => {
 const ShopContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 5rem;
 `;

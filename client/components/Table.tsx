@@ -19,7 +19,7 @@ export const Table: FC<Props> = ({ result }) => {
           Object.entries(result)
             .filter((el) => el[1] !== "0個")
             .map((el) => (
-              <tr>
+              <tr key={String(el)}>
                 <td>{el[0]}</td>
                 <td>{el[1].replace("個", "")}</td>
               </tr>
@@ -30,14 +30,19 @@ export const Table: FC<Props> = ({ result }) => {
 };
 
 const TableContainer = styled.div`
-  width: 30rem;
-  height: 30rem;
+  width: 25rem;
+  height: 25rem;
   overflow-y: auto;
   border-radius: 0.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   table {
     width: 100%;
+    thead,
+    tbody {
+      display: block;
+    }
     th,
     td {
       border: 0.1rem solid rgba(0, 0, 0, 0.1);
@@ -48,6 +53,7 @@ const TableContainer = styled.div`
       background: ${COLOR.BLACK};
       color: ${COLOR.WHITE};
       font-weight: bold;
+      white-space: nowrap;
     }
   }
   ${sp`

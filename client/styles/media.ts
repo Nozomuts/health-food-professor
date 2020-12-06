@@ -9,7 +9,7 @@ export const sp = (
   first: CSSObject | TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]
 ): FlattenSimpleInterpolation => css`
-  @media (max-width: 56rem) {
+  @media (max-width: 35.1rem) {
     ${css(first, ...interpolations)}
   }
 `;
@@ -18,7 +18,7 @@ export const tab = (
   first: CSSObject | TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]
 ): FlattenSimpleInterpolation => css`
-  @media (min-width: 56.1rem) and (max-width: 102.4rem) {
+  @media (min-width: 35.1rem) and (max-width: 63.8rem) {
     ${css(first, ...interpolations)}
   }
 `;
@@ -26,7 +26,7 @@ export const pc = (
   first: CSSObject | TemplateStringsArray,
   ...interpolations: SimpleInterpolation[]
 ): FlattenSimpleInterpolation => css`
-  @media (min-width: 102.5rem) {
+  @media (min-width: 63.8rem) {
     ${css(first, ...interpolations)}
   }
 `;

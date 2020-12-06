@@ -18,7 +18,7 @@ export const MethodRadio: FC<Props> = ({ method, set_method }) => {
   return (
     <RadioGroup>
       {radio_list.map(({ icon, label, value }) => (
-        <InputContainer checked={method === value}>
+        <InputContainer checked={method === value} key={value}>
           <RadioButton type="radio" onClick={() => set_method(value)} />
           <RadioTile>
             <FontAwesomeIcon icon={icon} />

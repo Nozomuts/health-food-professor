@@ -36,7 +36,7 @@ export default function Result() {
       ) : (
         <RecommendContainer>
           <H1>
-            残念ながら選択されたお店では一日の栄養素を満たすものはないようです。
+            残念ながら選択されたメニュー・お店では一日の栄養素を満たすものはないようです。
             <br />
             <br />
             {result.length === 1 && "こんなメニューはいかがですか？"}

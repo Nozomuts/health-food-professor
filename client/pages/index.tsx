@@ -67,7 +67,7 @@ export default function Home() {
       if (method === "shop" && shop.length > 0) data["shop"] = shop;
       else if (method === "menu" && menu.length > 0) {
         data["menu"] = menu;
-        data["shop"] = ["macdonalds", "dennys"];
+        data["shop"] = ["macdonalds", "dennys", "mos"];
       } else {
         setError("menu", { type: "required" });
         first_ref.current?.scrollIntoView({

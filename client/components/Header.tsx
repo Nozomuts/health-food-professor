@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <HeaderContainer onClick={() => router.push("/")}>
       <FontAwesomeIcon icon={faGraduationCap} />
-      <h3>Healty Food Professor v2.2.0</h3>
+      <h3>Healty Food Professor v3.0.0</h3>
     </HeaderContainer>
   );
 };

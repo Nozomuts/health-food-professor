@@ -35,7 +35,7 @@ export const Chart: FC<Props> = ({ result }) => {
 
   return (
     <RadarChart
-      cx={is_sp() ? 150 : 200}
+      cx={is_sp() ? 150 : 210}
       cy={is_sp() ? 120 : 150}
       outerRadius={is_sp() ? 80 : 100}
       width={is_sp() ? 320 : 430}

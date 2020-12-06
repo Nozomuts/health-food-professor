@@ -9,6 +9,8 @@ from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 from up_limit import up_limit
 from menu_dict import menu_dict
+from recommend import recommend
+from find import find
 
 
 # flaskの設定
@@ -54,48 +56,14 @@ def index():
         one_da_nutrition_dict = old_one_da_nutrition_dict(gender, old)
         # print("one_da_nutrition_dict:",one_da_nutrition_dict)
 
-        # 対象とする栄養素について、対象の商品リストごとの栄養価を、リスト形式で作成する
-        eiyou_data = {}
-        for key in one_da_nutrition_dict.keys():
-            # keyに入っている栄養の名称を、データのdictのkeyにする。
-            eiyou_data[key] = get_nutrition_val_list(
-                MenuDict, target_menu_list, key)
+        eiyou_data,xs,status,cal_key = find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict)
 
-        # 変数の定義
-        # LpVariableで自由辺巣を作成。値は-∞から∞まで
-        # lowBoundで0から∞まで
-        # catで変数の種類指定
-        # 商品の上限指定　
-        #print("up_value:", up_value)
-        xs = up_limit(target_menu_list, up_value)
-
-        # 目的関数：カロリーを最小化
-        # lpdot:二つのリストのない席を求める。
-        problem += pulp.lpDot(eiyou_data["エネルギー[kcal]"], xs)
-
-        # 制約条件：　一日に必要内容量をそれぞれ満たすこと
-        # 条件カスタマイズ＆ON-OFFしやすいように、あえてループ外で起債。
-        # 食塩相当については、「以内」としている。解が存在スカは要注意
-        for key in eiyou_data.keys():
-            # 食塩は以下なので別個でやる
-            if key == "食塩相当量[g]":
-                continue
-            # メニューの数と栄養素のデータの数が一致しないときは計算しない。
-            if len(eiyou_data[key]) == len(target_menu_list):
-                #print("eiyou_data[key]",len(eiyou_data[key]),len(target_menu_list))
-                problem += pulp.lpDot(eiyou_data[key], xs) >= float(one_da_nutrition_dict[key])
-
-        problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
-
-        # 与えられた問題の内容を表示
-        # print(problem)
-        status = problem.solve()
         print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
         if pulp.LpStatus[status] == "Optimal":
 
 
             # 簡易結果表示
-            #print([x.value() for x in xs])
+            # print([x.value() for x in xs])
             # print(problem.objective.value())
 
             #　変数名ごとに表示
@@ -118,13 +86,34 @@ def index():
             return make_response(jsonify(response))
         # 条件にあった解が見つからなかった時はerrorを返す
         else:
-            response = 'error'
-            return make_response(jsonify(response))
+
+            rec_problem = pulp.LpProblem(name ="1日の栄養素を満たす追加のメニュー", sense = pulp.LpMinimize)
+            recommend_menu_list,one_da_nutrition_dict = recommend(MenuDict,target_menu_list,one_da_nutrition_dict,eiyou_data)
+            if not recommend_menu_list:
+                print("残念ながら選択されたお店では一日の栄養素を満たすものはないようです")
+                exit()
+            eiyou_data,xs,re_status,cal_key = find(rec_problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
+            #　変数名ごとに表示
+            if pulp.LpStatus[re_status] == "Optimal":
+                rec_menu={}
+                print("追加でこんなメニューはどうですか")
+                for x in xs:
+                    if int(x.value()) != 0:
+                        #print("x.value:",x.value)
+                        print(str(x),":",str(int(x.value())),"個")
+                        rec_menu[str(x)] = str(int(x.value()))+"個"
+                response=[rec_menu]
+                return make_response(jsonify(response))
+
+            else:
+                print("もう一度メニューを考え直してみよう")
+                response = 'error'
+                return make_response(jsonify(response))
+
     except:
         return"""
             ERROR !!!
             """
-
 
 # python main.pyで実行されたときだけ動くようにする。
 if __name__ == "__main__":		# importされると"__main__"は入らないので，実行かimportかを判断できる．

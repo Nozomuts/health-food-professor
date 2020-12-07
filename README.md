@@ -1,7 +1,35 @@
 # Health Food Professor v3.0.0
-メニューかお店を選択して、年齢、性別、上限など入力すると、1日に必要な栄養素をとるメニューを計算で求めてくれます。
+普段外食を食べていると栄養がきちんととれているか気になりませんか？
+このウェブアプリではマクドナルド、デニーズ、モスバーガーの三店舗のメニューの中で一日に取るべき栄養素を満たすメニューを表示してくれたり、
+自分の選んだメニューに対して一日の栄養素を満たすようにおすすめのメニューを表示してくれます。
 
-使用技術：Next.js、Flask
+# Skill
+
+* Next.js
+* Flask
+
+ 
+# DEMO
+ ![35414 t](https://user-images.githubusercontent.com/67312455/101329154-5b2ee200-38b4-11eb-8b17-dc3562fa06a8.gif)
+
+
+ 
+# Features
+ 現在コロナ化で外出を控えている方々に向けて制作しました。UberEatsなどに併用して使ってもらえると嬉しいです。
+ 
+# Usage
+ URL：　https://nutrient-app-lyart.vercel.app/
+ 
+
+# Note
+ カロリーを最小化しつつ栄養素を満たすよう計算します。
+ 
+# Author
+
+* Backend:kimiyuki iwaki
+* Frontend:nozomu tsuruta
+
+# Log
 
 * v3.0.0 モスバーガーのメニュー、recommend機能を追加
 * v2.2.0 バリデーションなど追加、スタイル大幅修正
